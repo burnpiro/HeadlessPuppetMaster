@@ -1,0 +1,46 @@
+body:after {
+  position: fixed;
+  top: 3vh;
+  right: 3vw;
+  background: url(QOlogoText.png) no-repeat;
+  background-size: 15vh 8.8vh;
+  width: 15vh;
+  height: 8.8vh;
+  content:"";
+  font-size: 80% !important;
+}
+
+img {
+  border: 0 !important;
+  box-shadow: none !important;
+  max-height: 60vh !important;
+}
+
+.timeoutSize {
+  max-height: 30vh !important;
+}
+
+.reveal pre {
+  margin: 0 auto;
+  box-shadow: none;
+  font-size: 16px;
+}
+
+a {
+  font-size: 80% !important;
+  line-height: 120% !important;
+}
+
+.codeBlock {
+}
+
+.codeBlock pre code {
+}
+
+mark {
+  background-color: rgba(181, 157, 97, 0.51);
+}
+
+mark > * {
+  /*color: black !important;*/
+}
