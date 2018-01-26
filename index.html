@@ -32,75 +32,67 @@
       <aside class="notes"></aside>
     </section>
 
-    <section data-background="assets/wrong_cables.jpg">
+    <section>
+      <p><strong>End-to-end testing is a methodology used to test whether the flow of an application is performing as designed from start to finish.</strong></p><br/>
+      <small style="float: left; font-size: 0.5em; font-weight: bold; color: grey; padding-left: 20px;">https://www.techopedia.com/definition/7035/end-to-end-test</small>
+      <aside class="notes">
+
+      </aside>
     </section>
 
     <section>
-      <section>
-        <p><strong>Babel<span class="fragment"> - the transpiler</span></strong></p>
-        <a href="https://github.com/babel/awesome-babel" class="fragment">https://github.com/babel/awesome-babel</a>
-        <aside class="notes">
-          source to source compiler
-        </aside>
-      </section>
+      <p><strong>Testing, why bother?</strong></p>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section data-background="assets/fixing_bug.gif">
     </section>
 
     <section>
-      <section>
-        <h2>Plugins</h2>
-        <div class="fragment">
-          <p>babel-plugin-feature-flags</p>
-          <p>babel-plugin-transform-builtin-extend</p>
-        </div>
-        <aside class="notes">
-          enable-feature by using flag <br/>
-          allows to extend buildin types like Array
-        </aside>
-      </section>
+      <p><strong>Selenium + WebDriver</strong></p>
+      <p><strong class="fragment">PhantomJS</strong></p>
+      <aside class="notes">
+      </aside>
+    </section>
+
+    <section style="padding: 5vh 0" data-background="assets/not-sure.jpg">
     </section>
 
     <section>
-      <section>
-        <p><strong>How to use?</strong></p>
-        <p>.babelrc</p>
-        <pre style="width: 95%; margin: 0" class="stretch">
-        <code class="language-javascript" data-trim>
-          {
-            "plugins": [
-              "babel-plugin-feature-flags",
-              "babel-plugin-transform-builtin-extend"
-            ]
-          }
-        </code>
-        </pre>
-        <aside class="notes">
-
-        </aside>
-      </section>
+      <h2 style="display: flex; align-items: center"><img src="assets/chrome.png" style="float: left; padding-right: 15px;">Headless Chrome</h2>
+      <aside class="notes">
+      </aside>
     </section>
 
     <section>
-      <section>
-        <p><strong>How to use?</strong></p>
-        <p>.babelrc</p>
-        <pre style="width: 95%; margin: 0" class="stretch">
-        <code class="language-javascript" data-trim>
-          {
-            "presets": [
-              "react",
-              ["env", {
-                "targets": {
-                  "browsers": ["last 2 versions", "safari >= 10"]
-                }
-              }]
-            ]
-          }
-        </code>
-        </pre>
-        <aside class="notes">
+      <img src="assets/puppeteerLogo.png">
+      <aside class="notes">
 
-        </aside>
-      </section>
+      </aside>
+    </section>
+
+    <section>
+      <p><strong>How to use?</strong></p>
+      <p>.babelrc</p>
+      <pre style="width: 95%; margin: 0" class="stretch">
+      <code class="language-javascript" data-trim>
+        {
+          "presets": [
+            "react",
+            ["env", {
+              "targets": {
+                "browsers": ["last 2 versions", "safari >= 10"]
+              }
+            }]
+          ]
+        }
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
     </section>
 
     <section data-background="assets/rollupAndWebpack.png">
@@ -114,31 +106,31 @@
     </section>
 
     <section class="codeBlock">
-        <pre style="width: 95%; margin: 0" class="stretch">
-        <code class="language-javascript" data-trim>
-          {
-            entry: {
-              main: pathToMainJSFile,
-              <mark>vendors: pathToVendorsIndex</mark>
-            },
-            output: {
-              filename: '<mark>[name]</mark>.bundle.js',
-              path: pathToDistDir
-            },
-            module: {
-              rules: [
-                {...}
-              ]
-            ],
-            <mark>plugins: [</mark>
-              <mark>new webpack.optimize.CommonsChunkPlugin({</mark>
-                <mark>name: 'common'</mark>
-              <mark>})</mark>
-            <mark>]</mark>,
-            resolve: {...}
-          }
-        </code>
-        </pre>
+      <pre style="width: 95%; margin: 0" class="stretch">
+      <code class="language-javascript" data-trim>
+        {
+          entry: {
+            main: pathToMainJSFile,
+            <mark>vendors: pathToVendorsIndex</mark>
+          },
+          output: {
+            filename: '<mark>[name]</mark>.bundle.js',
+            path: pathToDistDir
+          },
+          module: {
+            rules: [
+              {...}
+            ]
+          ],
+          <mark>plugins: [</mark>
+            <mark>new webpack.optimize.CommonsChunkPlugin({</mark>
+              <mark>name: 'common'</mark>
+            <mark>})</mark>
+          <mark>]</mark>,
+          resolve: {...}
+        }
+      </code>
+      </pre>
       <aside class="notes">
 
       </aside>
