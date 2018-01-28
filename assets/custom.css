@@ -35,6 +35,7 @@ a {
 }
 
 .codeBlock pre code {
+  font-size: 1.5em;
 }
 
 mark {
@@ -43,4 +44,8 @@ mark {
 
 mark > * {
   /*color: black !important;*/
+}
+
+.stretch {
+  max-width: calc(100% - 40px) !important;
 }

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>reveal.js</title>
+  <title>How to become headless puppet master</title>
 
   <link rel="stylesheet" href="css/reveal.css">
   <link rel="stylesheet" href="css/theme/beige.css">
@@ -74,19 +74,93 @@
     </section>
 
     <section>
-      <p><strong>How to use?</strong></p>
-      <p>.babelrc</p>
+      <p><strong>How to install?</strong></p>
+      <pre>
+      <code class="language-javascript" data-trim>
+        yarn add puppeteer
+      </code>
+      </pre>
+      <pre class="fragment">
+      <code class="language-javascript" data-trim>
+        export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section class="codeBlock" data-transition="none">
+      <pre>
+      <code class="language-javascript" data-trim>
+        <mark>const puppeteer = require('puppeteer');</mark>
+
+        <mark>puppeteer.launch()</mark>.then(async browser => {
+          const page = await browser.newPage();
+          await page.goto('https://www.google.com');
+          // other actions...
+          await browser.close();
+        });
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section class="codeBlock" data-transition="none">
+      <pre>
+      <code class="language-javascript" data-trim>
+        const puppeteer = require('puppeteer');
+
+        puppeteer.launch().then(async browser => {
+          const page = <mark>await browser.newPage();</mark>
+          await page.goto('https://www.google.com');
+          // other actions...
+          await browser.close();
+        });
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section class="codeBlock" data-transition="none">
+      <pre>
+      <code class="language-javascript" data-trim>
+        const puppeteer = require('puppeteer');
+
+        puppeteer.launch().then(async browser => {
+          const page = await browser.newPage();
+          <mark>await page.goto('https://www.google.com');</mark>
+          // other actions...
+          await browser.close();
+        });
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section class="codeBlock">
       <pre style="width: 95%; margin: 0" class="stretch">
       <code class="language-javascript" data-trim>
-        {
-          "presets": [
-            "react",
-            ["env", {
-              "targets": {
-                "browsers": ["last 2 versions", "safari >= 10"]
-              }
-            }]
-          ]
+        const env = process.env.ENV || 'development'
+        const testUrl = process.env.TEST_URL || 'https://reactjs.org/'
+
+        module.exports = {
+          testMatch: [
+            `**/?(*.)(spec|test).js`
+          ],
+          setupTestFrameworkScriptFile: `${__dirname}/setups/test.setup.js`,
+          globals: { // available in all tests
+            browser: null,
+            page: null,
+            testUrl,
+            env
+          }
         }
       </code>
       </pre>
@@ -95,42 +169,49 @@
       </aside>
     </section>
 
-    <section data-background="assets/rollupAndWebpack.png">
-      <h2 style="color: #fff; text-shadow:
-       -4px -4px 0 #000,
-      4px -4px 0 #000,
-       -4px 4px 0 #000,
-      4px 4px 0 #000; margin-top: 40vh">
-        Rollup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Webpack
-      </h2>
-    </section>
-
     <section class="codeBlock">
       <pre style="width: 95%; margin: 0" class="stretch">
       <code class="language-javascript" data-trim>
-        {
-          entry: {
-            main: pathToMainJSFile,
-            <mark>vendors: pathToVendorsIndex</mark>
-          },
-          output: {
-            filename: '<mark>[name]</mark>.bundle.js',
-            path: pathToDistDir
-          },
-          module: {
-            rules: [
-              {...}
+        const puppeteer = require('puppeteer')
+        const env = process.env.ENV || 'development'
+
+        beforeAll(async () => {
+          jest.setTimeout(2400000)
+
+          browser = await puppeteer.launch({
+            args: [
+              '--no-sandbox',
+              '--disable-setuid-sandbox'
             ]
-          ],
-          <mark>plugins: [</mark>
-            <mark>new webpack.optimize.CommonsChunkPlugin({</mark>
-              <mark>name: 'common'</mark>
-            <mark>})</mark>
-          <mark>]</mark>,
-          resolve: {...}
-        }
+          })
+        })
+
+        afterAll(async () => {
+          await browser.close()
+        })
       </code>
       </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section class="codeBlock">
+      <pre style="width: 95%; margin: 0">
+      <code class="language-javascript" data-trim>
+        describe('tests suite', async () => {
+          beforeEach(async () => {
+            page = await browser.newPage()
+            await page.setViewport({ width: 1920, height: 1080 })
+          })
+
+          it('works', async () => {
+            // tests here
+          })
+        })
+      </code>
+      </pre>
+      <a href="https://github.com/burnpiro/puppeteer-wiki-test-suite">https://github.com/burnpiro/puppeteer-wiki-test-suite</a>
       <aside class="notes">
 
       </aside>
