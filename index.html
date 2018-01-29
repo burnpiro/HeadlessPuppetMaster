@@ -47,6 +47,26 @@
       </aside>
     </section>
 
+    <section>
+      <p><strong>Because of JavaScript?</strong></p>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section>
+      <p><strong>We're humans</strong></p>
+      <img src="assets/human.png" style="width: 90%" />
+      <p><strong class="fragment">and Perfection is an issue</strong></p>
+    </section>
+
+    <section>
+      <p class="center">
+        <strong>What color am I?</strong>
+        <img src="assets/dress.jpg" style="max-height: 100%; float: left; margin-left: 20px;" />
+      </p>
+    </section>
+
     <section data-background="assets/fixing_bug.gif">
     </section>
 
@@ -205,16 +225,142 @@
             await page.setViewport({ width: 1920, height: 1080 })
           })
 
-          it('works', async () => {
+          it('tests sth', async () => {
             // tests here
           })
         })
       </code>
       </pre>
-      <a href="https://github.com/burnpiro/puppeteer-wiki-test-suite">https://github.com/burnpiro/puppeteer-wiki-test-suite</a>
       <aside class="notes">
 
       </aside>
+    </section>
+
+    <section class="codeBlock">
+      <pre style="width: 95%; margin: 0">
+      <code class="language-javascript" data-trim>
+        describe('tests suite', async () => {
+          beforeEach(async () => {
+            page = await browser.newPage()
+            await page.setViewport({ width: 1920, height: 1080 })
+          })
+
+          it('tests sth', async () => {
+            await page.goto('http://example.com');
+            await page.screenshot({path: 'example.png'});
+          })
+        })
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section class="codeBlock">
+      <pre style="width: 95%; margin: 0"  class="stretch">
+      <code class="language-javascript" data-trim>
+        const devices = require('puppeteer/DeviceDescriptors');
+
+        describe('tests suite', async () => {
+          beforeEach(async () => {
+            page = await browser.newPage()
+            <mark>await page.emulate(devices['iPhone 6'])</mark>
+          })
+
+          it('tests sth', async () => {
+            await page.goto('http://example.com')
+            await page.screenshot({path: 'example.png', fullPage: true})
+          })
+        })
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section class="codeBlock">
+      <pre style="width: 95%; margin: 0" class="stretch">
+      <code class="language-javascript" data-trim>
+        describe('tests suite', async () => {
+          beforeEach(async () => {
+            page = await browser.newPage()
+            await page.setViewport({ width: 1920, height: 1080 })
+          })
+
+          it('tests sth', async () => {
+            await page.goto('http://example.com', {waitUntil: 'networkidle2'});
+            await page.pdf({
+              path: 'example.pdf',
+              format: 'letter'
+            });
+          })
+        })
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section class="codeBlock">
+      <pre style="width: 95%; margin: 0" class="stretch">
+      <code class="language-javascript" data-trim>
+        describe('tests suite', async () => {
+          beforeEach(async () => {
+            page = await browser.newPage()
+            await page.setViewport({ width: 1920, height: 1080 })
+          })
+
+          it('tests sth', async () => {
+            await page.setRequestInterception(true);
+            page.on('request', request => {
+              if (request.resourceType() === 'image')
+                request.abort();
+              else
+                request.continue();
+            });
+          })
+        })
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section class="codeBlock">
+      <pre style="width: 95%; margin: 0" class="stretch">
+      <code class="language-javascript" data-trim>
+        describe('tests suite', async () => {
+          it('tests sth', async () => {
+            await page.goto('http://example.com')
+
+            // Type into search box.
+            await page.type('.searchBox input', 'To Be or Not To Be?')
+            await page.click('.searchBox button')
+
+            // Wait for search button
+            const resultsList = 'li.results'
+            await page.waitForSelector(resultsList)
+            const resultsLength = await this.page.$eval(
+              resultsList,
+              el => el.children.length
+            )
+            expect(resultsLength).toBe(14)
+          })
+        })
+      </code>
+      </pre>
+      <aside class="notes">
+
+      </aside>
+    </section>
+
+    <section>
+      <h2>DEMO!!!</h2>
+      <a href="https://github.com/burnpiro/puppeteer-wiki-test-suite">https://github.com/burnpiro/puppeteer-wiki-test-suite</a>
     </section>
 
     <section>
